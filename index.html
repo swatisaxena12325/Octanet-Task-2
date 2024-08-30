@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome To-Do List HTML, CSS & JS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="addTask">
+            <input type="text" placeholder="Add a Task">
+            <button>Add</button>
+        </div>
+
+
+        <ol class="notCompleted">
+            <h3>Not Completed</h3>
+           
+        </ol>
+
+        <ol class="Completed">
+            <h3>Completed</h3>
+                  </ol>
+
+    </div>
+    <script>
+        const input = document.querySelector('input');
+        const btn = document.querySelector('.addTask > button');
+
+        btn.addEventListener('click', addList);
+        input.addEventListener('keyup',(e)=>{
+            (e.keyCode === 13 ? addList(e) : null)
+        });
+
+        function addList(e){
+            const notCompleted = document.querySelector('.notCompleted');
+            const Completed = document.querySelector('.Completed');
+
+            const newLi = document.createElement('li');
+            const checkBtn = document.createElement('button');
+            const dltbtn = document.createElement('button');
+            
+            
+            checkBtn.innerHTML = '<i class="fa fa-check"></i>';
+            dltbtn.innerHTML =  '<i class="fa fa-trash"></i>';
+
+            if(input.value !==''){
+                newLi.textContent = input.value;
+                input.value = '';
+                notCompleted.appendChild(newLi);
+                newLi.appendChild(checkBtn);
+                newLi.appendChild(dltbtn);
+            }
+
+            checkBtn.addEventListener('click', function(){
+                const parent = this.parentNode;
+                parent.remove();
+                Completed.appendChild(parent);
+                checkBtn.style.display = 'none';
+
+            });
+            dltbtn.addEventListener('click', function(){
+                const parent = this.parentNode;
+                parent.remove();
+                
+            });
+
+
+        }
+    </script>
+    
+</body>
+</html>
